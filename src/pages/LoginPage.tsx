@@ -34,8 +34,8 @@ const LoginPage: React.FC = () => {
     const { error } = await supabase.auth.signInWithOAuth({
       provider: 'google',
       options: {
-        redirectTo: `${window.location.origin}/confirm`,
-      },
+        redirectTo: 'https://gifta-three.vercel.app'
+      }
     });
 
     if (error) {
