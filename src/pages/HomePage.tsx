@@ -306,19 +306,19 @@ const HomePage = () => {
       <Navbar />
 
       <main className="max-w-4xl mx-auto px-4 py-24 space-y-8">
-        <header className="text-center space-y-6 animate-fade-in">
-          <div className="flex justify-center animate-slide-down">
+        <header className="text-center space-y-6">
+          <div className="flex justify-center">
             <Illustration className="w-24 h-24 text-gray-900 dark:text-white" />
           </div>
-          <h1 className="text-4xl font-semibold tracking-tight text-gray-900 dark:text-white animate-slide-down [animation-delay:200ms]">
+          <h1 className="text-4xl font-semibold tracking-tight text-gray-900 dark:text-white">
             Trova idee regalo personalizzate
           </h1>
-          <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto animate-slide-down [animation-delay:400ms]">
+          <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
             {t('app.description')}
           </p>
         </header>
 
-        <form onSubmit={handleSubmit} className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm space-y-6 animate-slide-up [animation-delay:600ms]">
+        <form onSubmit={handleSubmit} className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm space-y-6">
           {user && people.length > 0 && (
             <PersonSelector
               people={people}
