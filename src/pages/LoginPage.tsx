@@ -4,6 +4,7 @@ import { Loader2, Eye, EyeOff } from 'lucide-react';
 import { toast } from 'sonner';
 import { useAuth } from '../contexts/AuthContext';
 import Navbar from '../components/Navbar';
+import { supabase } from '../lib/supabase';
 
 const LoginPage: React.FC = () => {
   const navigate = useNavigate();
@@ -26,6 +27,19 @@ const LoginPage: React.FC = () => {
       toast.error('Errore durante il login');
     } finally {
       setIsLoading(false);
+    }
+  };
+
+  const handleGoogleLogin = async () => {
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: 'google',
+      options: {
+        redirectTo: `${window.location.origin}/confirm`,
+      },
+    });
+
+    if (error) {
+      toast.error('Errore durante l’accesso con Google');
     }
   };
 
@@ -107,6 +121,26 @@ const LoginPage: React.FC = () => {
                   ) : (
                     <span>Accedi</span>
                   )}
+                </button>
+
+                <div className="relative my-6">
+                  <div className="absolute inset-0 flex items-center">
+                    <div className="w-full border-t border-gray-300 dark:border-gray-600" />
+                  </div>
+                  <div className="relative flex justify-center text-sm">
+                    <span className="bg-white dark:bg-gray-800 px-2 text-gray-500 dark:text-gray-400">
+                      oppure
+                    </span>
+                  </div>
+                </div>
+
+                <button
+                  type="button"
+                  onClick={handleGoogleLogin}
+                  className="w-full border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-700 dark:text-white py-3 px-6 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors flex items-center justify-center gap-2"
+                >
+                  <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google logo" className="h-5 w-5" />
+                  <span>Accedi con Google</span>
                 </button>
 
                 <p className="text-center text-sm text-gray-600 dark:text-gray-300">

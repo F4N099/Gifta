@@ -225,14 +225,49 @@ const RegisterPage: React.FC = () => {
                     <span>Registrati</span>
                   )}
                 </button>
-
-                <p className="text-center text-sm text-gray-600 dark:text-gray-300">
-                  Hai già un account?{' '}
-                  <Link to="/login" className="text-rose-500 hover:text-rose-600 font-medium">
-                    Accedi qui
-                  </Link>
-                </p>
               </form>
+
+              {/* Divider */}
+              <div className="relative my-6">
+                <div className="absolute inset-0 flex items-center">
+                  <div className="w-full border-t border-gray-200 dark:border-gray-700"></div>
+                </div>
+                <div className="relative flex justify-center text-sm">
+                  <span className="px-2 bg-white dark:bg-gray-800 text-gray-500">oppure</span>
+                </div>
+              </div>
+
+              {/* Google Button */}
+              <button
+                type="button"
+                onClick={async () => {
+                  const { error } = await supabase.auth.signInWithOAuth({
+                    provider: 'google',
+                    options: {
+                      redirectTo: 'https://gifta-three.vercel.app/',
+                    },
+                  });
+                  if (error) {
+                    toast.error('Errore durante l\'accesso con Google');
+                    console.error('Google login error:', error.message);
+                  }
+                }}
+                className="w-full bg-white dark:bg-gray-100 text-gray-800 border border-gray-300 hover:bg-gray-50 dark:hover:bg-gray-200 py-2 px-4 rounded-xl transition-colors flex items-center justify-center gap-2"
+              >
+                <img
+                  src="https://www.svgrepo.com/show/475656/google-color.svg"
+                  alt="Google"
+                  className="w-5 h-5"
+                />
+                Registrati con Google
+              </button>
+
+              <p className="text-center text-sm text-gray-600 dark:text-gray-300 mt-6">
+                Hai già un account?{' '}
+                <Link to="/login" className="text-rose-500 hover:text-rose-600 font-medium">
+                  Accedi qui
+                </Link>
+              </p>
             </div>
           </div>
         </div>
